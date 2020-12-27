@@ -24,12 +24,49 @@ export class AuthService {
       password
     };
     return this.http
-      .post<{access_token: string}>(ApiPath.login, request, { observe: 'response' })
+      .post<{token: string}>(ApiPath.login, request, { observe: 'response' })
       .pipe(
-        map((response: HttpResponse<{access_token: string}>) => {
+        map((response: HttpResponse<{token: string}>) => {
           const success = response.ok;
           if (success) {
-            const token = response.body.access_token;
+            const token = response.body.token;
+            const user = new User(email, token);
+            return new AuthResult(true, user);
+          }
+
+          return new AuthResult(false);
+        }),
+        tap((response: AuthResult) => {
+          const success = response.success;
+          if (success) {
+            this.setSession(response);
+          }
+          if (this.redirectUrl) {
+            this.router.navigate([this.redirectUrl]);
+          } else {
+            this.router.navigate(['/landing']);
+          }
+          this.authStateChange.next(response);
+        }),
+        shareReplay()
+      );
+  }
+
+  public register(name: string, email: string, password: string): Observable<AuthResult> {
+    const request = {
+      email,
+      password,
+      name,
+      isLandlord: true
+    };
+    console.warn(request);
+    return this.http
+      .post<{token: string}>(ApiPath.register, request, { observe: 'response' })
+      .pipe(
+        map((response: HttpResponse<{token: string}>) => {
+          const success = response.ok;
+          if (success) {
+            const token = response.body.token;
             const user = new User(email, token);
             return new AuthResult(true, user);
           }

@@ -4,4 +4,5 @@ export class ApiPath {
 
     public static readonly auth: string = `${ApiPath.api}/auth`;
     public static readonly login: string = `${ApiPath.auth}/login`;
+    public static readonly register: string = `${ApiPath.auth}/register`;
 }

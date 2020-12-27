@@ -9,8 +9,12 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent implements OnInit {
   isLogin = true;
 
-  loginEmail: string;
-  loginPassword: string;
+  loginEmail = '';
+  loginPassword = '';
+
+  registerEmail = '';
+  registerName = '';
+  registerPassword = '';
 
   constructor(private auth: AuthService) { }
 
@@ -35,7 +39,9 @@ export class LoginComponent implements OnInit {
   }
 
   onRegister(): void {
-
+    this.auth.register(this.registerName, this.registerEmail, this.registerPassword).subscribe((res) => {
+      console.log(res);
+    });
   }
 
 }
