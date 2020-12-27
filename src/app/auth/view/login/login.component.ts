@@ -9,8 +9,8 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent implements OnInit {
   isLogin = true;
 
-  loginEmail: string;
-  loginPassword: string;
+  loginEmail = '';
+  loginPassword = '';
 
   constructor(private auth: AuthService) { }
 

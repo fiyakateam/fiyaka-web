@@ -24,12 +24,12 @@ export class AuthService {
       password
     };
     return this.http
-      .post<{access_token: string}>(ApiPath.login, request, { observe: 'response' })
+      .post<{token: string}>(ApiPath.login, request, { observe: 'response' })
       .pipe(
-        map((response: HttpResponse<{access_token: string}>) => {
+        map((response: HttpResponse<{token: string}>) => {
           const success = response.ok;
           if (success) {
-            const token = response.body.access_token;
+            const token = response.body.token;
             const user = new User(email, token);
             return new AuthResult(true, user);
           }
