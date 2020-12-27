@@ -14,12 +14,15 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { LoginComponent } from './auth/view/login/login.component';
+import { LogoutComponent } from './auth/view/logout/logout.component';
+import { RegisterComponent } from './auth/view/register/register.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,  LoginComponent, LogoutComponent, RegisterComponent
   ],
   imports: [
     BrowserModule,

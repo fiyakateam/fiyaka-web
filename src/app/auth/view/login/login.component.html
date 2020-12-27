@@ -1,8 +1,9 @@
+
 <div class="wrapper fadeInDown">
     <div id="formContent">
       <!-- Tabs Titles -->
-      <h2 class="active"> Sign In </h2>
-      <h2 class="inactive underlineHover">Sign Up </h2>
+      <h2 [ngClass]="[isLogin ? 'active' : 'inactive', !isLogin ? 'underlineHover' : '']" (click)="switchToLogin()"> Login </h2>
+      <h2 [ngClass]="[!isLogin ? 'active' : 'inactive', isLogin ? 'underlineHover' : '']" (click)="switchToRegister()">Register </h2>
   
       <!-- Icon -->
       <div class="fadeIn first">
@@ -10,11 +11,24 @@
       </div>
   
       <!-- Login Form -->
-      <form>
-        <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-        <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-        <input type="submit" class="fadeIn fourth" value="Log In">
-      </form>
+      <div *ngIf="isLogin">
+        <form>
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+          <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+      </div>
+
+      <!-- Register Form -->
+      <div *ngIf="!isLogin">
+        <form>
+          <input type="text" id="login" class="fadeIn second" name="reg" placeholder="login">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+          <input type="submit" class="fadeIn fourth" value="Log In">
+        </form>
+      </div>
+      
   
       <!-- Remind Passowrd -->
       <div id="formFooter">
