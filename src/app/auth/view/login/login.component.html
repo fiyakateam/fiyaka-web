@@ -22,10 +22,10 @@
       <!-- Register Form -->
       <div *ngIf="!isLogin">
         <form>
-          <input type="text" id="login" class="fadeIn second" name="reg" placeholder="login">
-          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-          <input type="submit" class="fadeIn fourth" value="Log In">
+          <input type="text" id="login" class="fadeIn second" name="reg" placeholder="name" [(ngModel)]="registerName">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="email" [(ngModel)]="registerEmail">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" [(ngModel)]="registerPassword">
+          <input type="submit" class="fadeIn fourth" value="Register" (click)="onRegister()">
         </form>
       </div>
       

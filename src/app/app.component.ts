@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   isCollapsed = false;
   authLink = '/login';
   authLabel = 'Login';
+  username = '';
 
   constructor(private auth: AuthService) {}
 
@@ -28,9 +29,11 @@ export class AppComponent implements OnInit {
   private refreshItems(authStatus: AuthResult): void {
     this.authLabel = 'Login';
     this.authLink = '/login';
+    this.username = '';
     if (authStatus.success) {
       this.authLabel = 'Logout';
       this.authLink = '/logout';
+      this.username = authStatus.user.username;
     }
   }
 }

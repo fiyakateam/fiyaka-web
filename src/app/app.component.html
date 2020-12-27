@@ -55,6 +55,10 @@
       <li nz-menu-item nzMatchRouter nzIcon="authIcon">
         <a [routerLink]="authLink">{{ authLabel }}</a>
       </li>
+
+      <li nz-menu-item *ngIf="username != null && username.length > 0">
+        Logged in as {{username}}
+      </li>
       <li>
         {{ version }}
       </li>

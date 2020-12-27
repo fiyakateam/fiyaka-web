@@ -52,6 +52,43 @@ export class AuthService {
       );
   }
 
+  public register(name: string, email: string, password: string): Observable<AuthResult> {
+    const request = {
+      email,
+      password,
+      name,
+      isLandlord: true
+    };
+    console.warn(request);
+    return this.http
+      .post<{token: string}>(ApiPath.register, request, { observe: 'response' })
+      .pipe(
+        map((response: HttpResponse<{token: string}>) => {
+          const success = response.ok;
+          if (success) {
+            const token = response.body.token;
+            const user = new User(email, token);
+            return new AuthResult(true, user);
+          }
+
+          return new AuthResult(false);
+        }),
+        tap((response: AuthResult) => {
+          const success = response.success;
+          if (success) {
+            this.setSession(response);
+          }
+          if (this.redirectUrl) {
+            this.router.navigate([this.redirectUrl]);
+          } else {
+            this.router.navigate(['/landing']);
+          }
+          this.authStateChange.next(response);
+        }),
+        shareReplay()
+      );
+  }
+
   public logout(): void {
     localStorage.removeItem(LocalStorage.token);
     localStorage.removeItem(LocalStorage.username);
