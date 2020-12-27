@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fiyaka-webapp';
+  version = 'v0.1';
+  isCollapsed = false;
+  authLink = '/login';
+  authLabel = 'Login';
 }
