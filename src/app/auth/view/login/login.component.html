@@ -13,9 +13,9 @@
       <!-- Login Form -->
       <div *ngIf="isLogin">
         <form>
-          <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-          <input type="submit" class="fadeIn fourth" value="Log In">
+          <input type="text" id="login" class="fadeIn second" name="login" placeholder="login" [ngModel]="loginEmail">
+          <input type="text" id="password" class="fadeIn third" name="login" placeholder="password" [ngModel]="loginPassword">
+          <input type="submit" class="fadeIn fourth" value="Log In" (click)="onLogin()">
         </form>
       </div>
 

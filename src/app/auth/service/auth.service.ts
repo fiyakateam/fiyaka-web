@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -7,6 +7,7 @@ import { LocalStorage } from 'src/app/config/local-storage';
 import { AuthResult } from '../model/auth-result';
 import { User } from '../model/user';
 import * as jwt from '../util/jwt-util';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,36 +18,38 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  public login(username: string, password: string): Observable<AuthResult> {
-    return null;
-    // const request = new Login(username, password);
-    // return this.http
-    //   .post<Token>(ApiPath.login, request, { observe: 'response' })
-    //   .pipe(
-    //     map((response: HttpResponse<Token>) => {
-    //       const success = response.ok;
-    //       if (success) {
-    //         const token = response.body.access_token;
-    //         const user = new User(username, token);
-    //         return new AuthResult(true, user);
-    //       }
+  public login(email: string, password: string): Observable<AuthResult> {
+    const request = {
+      email,
+      password
+    };
+    return this.http
+      .post<{access_token: string}>(ApiPath.login, request, { observe: 'response' })
+      .pipe(
+        map((response: HttpResponse<{access_token: string}>) => {
+          const success = response.ok;
+          if (success) {
+            const token = response.body.access_token;
+            const user = new User(email, token);
+            return new AuthResult(true, user);
+          }
 
-    //       return new AuthResult(false);
-    //     }),
-    //     tap((response: AuthResult) => {
-    //       const success = response.success;
-    //       if (success) {
-    //         this.setSession(response);
-    //       }
-    //       if (this.redirectUrl) {
-    //         this.router.navigate([this.redirectUrl]);
-    //       } else {
-    //         this.router.navigate(['/landing']);
-    //       }
-    //       this.authStateChange.next(response);
-    //     }),
-    //     shareReplay()
-    //   );
+          return new AuthResult(false);
+        }),
+        tap((response: AuthResult) => {
+          const success = response.success;
+          if (success) {
+            this.setSession(response);
+          }
+          if (this.redirectUrl) {
+            this.router.navigate([this.redirectUrl]);
+          } else {
+            this.router.navigate(['/landing']);
+          }
+          this.authStateChange.next(response);
+        }),
+        shareReplay()
+      );
   }
 
   public logout(): void {
