@@ -38,6 +38,14 @@
     <i nz-icon nzType="edit"></i>
   </ng-template>
   <ng-template #actionEllipsis>
-    <i nz-icon nzType="ellipsis"></i>
+    <a nz-dropdown [nzDropdownMenu]="menu">
+      <i nz-icon nzType="ellipsis" ></i>
+    </a>
   </ng-template>
 </div>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzSelectable>
+    <li nz-menu-item nzDanger (click)="onDelete()">Delete</li>
+  </ul>
+</nz-dropdown-menu>

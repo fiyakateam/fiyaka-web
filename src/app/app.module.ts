@@ -33,6 +33,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { AuthInterceptor } from './auth/middleware/auth.interceptor';
 import { UnauthorizedComponent } from './auth/view/unauthorized/unauthorized.component';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 
 registerLocaleData(en);
 
@@ -69,6 +70,7 @@ registerLocaleData(en);
     FormsModule,
     NzModalModule,
     NzBreadCrumbModule,
+    NzDropDownModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
