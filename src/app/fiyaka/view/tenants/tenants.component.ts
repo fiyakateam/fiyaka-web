@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
+import { TenantService } from '../../service/tenant.service';
 
 @Component({
   selector: 'app-tenants',
@@ -10,20 +12,13 @@ export class TenantsComponent implements OnInit {
   modalVisible = false;
   tenantList: Array<Tenant> = [];
 
-  constructor() {}
+  constructor(
+    private tenantService: TenantService,
+    private notificationService: NotificationService
+  ) {}
 
   ngOnInit(): void {
-    for (let i = 0; i < 100; i++) {
-      this.tenantList.push({
-        email: 'tenant@gmail.com',
-        name: 'Tenant Name',
-        description: 'Tenant Description...',
-        avatarImageUrl:
-          'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        bannerImageUrl:
-          'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-      });
-    }
+    this.refreshTenantList();
   }
 
   showModal(): void {
@@ -32,5 +27,28 @@ export class TenantsComponent implements OnInit {
 
   hideModal(): void {
     this.modalVisible = false;
+    this.refreshTenantList();
+  }
+
+  refreshTenantList(): void {
+    this.tenantService.getTenantList().subscribe(
+      (res) => {
+        this.tenantList = res.map((e) => {
+          const domain: Tenant = {
+            email: e.email,
+            name: e.name,
+            avatarImageUrl: '',
+            bannerImageUrl: '',
+            description: e.description,
+          };
+          return domain;
+        });
+        this.notificationService.pushSuccess('Tenant list refreshed!');
+      },
+      (error) => {
+        console.error(error);
+        this.notificationService.pushError('Could not get tenant list!');
+      }
+    );
   }
 }
