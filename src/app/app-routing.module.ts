@@ -5,6 +5,7 @@ import { LogoutComponent } from './auth/view/logout/logout.component';
 import { RegisterComponent } from './auth/view/register/register.component';
 import { LandingComponent } from './core/view/landing/landing.component';
 import { NotFoundComponent } from './core/view/not-found/not-found.component';
+import { TenantsComponent } from './fiyaka/view/tenants/tenants.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/landing', pathMatch: 'full' },
@@ -12,11 +13,12 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LogoutComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'tenants', component: TenantsComponent },
   { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

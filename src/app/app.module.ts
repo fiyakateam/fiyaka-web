@@ -22,6 +22,12 @@ import { NotFoundComponent } from './core/view/not-found/not-found.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { LoadingComponent } from './core/view/loading/loading.component';
 import { LoadingHttpInterceptor } from './core/middleware/loading-http.interceptor';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { TenantsComponent } from './fiyaka/view/tenants/tenants.component';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { TenantCardComponent } from './fiyaka/view/tenant-card/tenant-card.component';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 
 registerLocaleData(en);
 
@@ -34,6 +40,8 @@ registerLocaleData(en);
     LandingComponent,
     NotFoundComponent,
     LoadingComponent,
+    TenantsComponent,
+    TenantCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +53,10 @@ registerLocaleData(en);
     NzMenuModule,
     NzIconModule,
     NzMessageModule,
+    NzGridModule,
+    NzDividerModule,
+    NzCardModule,
+    NzAvatarModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
