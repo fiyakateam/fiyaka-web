@@ -16,5 +16,5 @@
   (nzOnCancel)="hideModal()"
   (nzOnOk)="hideModal()"
 >
-  <app-tenant-form></app-tenant-form>
+  <app-tenant-form (doneSubmit)="hideModal()"></app-tenant-form>
 </nz-modal>

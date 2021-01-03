@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
@@ -14,6 +14,7 @@ export class TenantFormComponent {
     email: ['', Validators.required],
     description: [null, Validators.required],
   });
+  @Output() doneSubmit = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +34,7 @@ export class TenantFormComponent {
       bannerImageUrl: '',
     };
     console.warn(tenant);
+    this.doneSubmit.emit();
   }
 
   isValid(): boolean {
