@@ -56,7 +56,6 @@ export class TenantFormComponent {
         this.generatedPassword = resPasssword;
         this.createdTenant = domain;
         this.isForm = false;
-        // this.doneSubmit.emit(domain);
       },
       (err) => {
         console.error(err);
