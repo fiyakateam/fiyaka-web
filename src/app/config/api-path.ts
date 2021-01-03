@@ -8,6 +8,9 @@ export class ApiPath {
 
   public static readonly tenant: string = `${ApiPath.api}/tenant`;
 
+  public static readonly landlord: string = `${ApiPath.api}/landlord`;
+  public static readonly landlordEmail: string = `${ApiPath.landlord}/email`;
+
   public static tenantId(id: string): string {
     return `${ApiPath.tenant}/${id}`;
   }
