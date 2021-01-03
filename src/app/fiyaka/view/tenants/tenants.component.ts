@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
 import { TenantService } from '../../service/tenant.service';
+import { TenantFormComponent } from '../tenant-form/tenant-form.component';
 
 @Component({
   selector: 'app-tenants',
@@ -9,6 +10,7 @@ import { TenantService } from '../../service/tenant.service';
   styleUrls: ['./tenants.component.css'],
 })
 export class TenantsComponent implements OnInit {
+  @ViewChild('tenantForm') tenantForm: TenantFormComponent;
   modalVisible = false;
   tenantList: Array<Tenant> = [];
 
@@ -25,8 +27,14 @@ export class TenantsComponent implements OnInit {
     this.modalVisible = true;
   }
 
+  showModalWithData(tenant: Tenant): void {
+    this.tenantForm.populateWithTenant(tenant);
+    this.modalVisible = true;
+  }
+
   hideModal(): void {
     this.modalVisible = false;
+    this.tenantForm.onReset();
     this.refreshTenantList();
   }
 
