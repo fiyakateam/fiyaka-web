@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiPath } from 'src/app/config/api-path';
-import { TenantResponse } from '../model/api/fiyaka_api';
+import {
+  TenantResponse,
+  TenantResponseWithPassword,
+} from '../model/api/fiyaka_api';
 import { Tenant } from '../model/tenant.model';
 
 @Injectable({
@@ -23,12 +26,12 @@ export class TenantService {
     return this.http.delete<void>(ApiPath.tenantId(id));
   }
 
-  createTenant(tenant: Tenant): Observable<TenantResponse> {
+  createTenant(tenant: Tenant): Observable<TenantResponseWithPassword> {
     const request = {
       email: tenant.email,
       name: tenant.name,
     };
-    return this.http.post<TenantResponse>(ApiPath.tenant, request);
+    return this.http.post<TenantResponseWithPassword>(ApiPath.tenant, request);
   }
 
   updateTenant(id: string, tenant: Tenant): Observable<TenantResponse> {

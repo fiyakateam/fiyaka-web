@@ -17,6 +17,10 @@ export class TenantFormComponent {
   });
   @Output() doneSubmit = new EventEmitter<Tenant>();
 
+  isForm = true;
+  createdTenant: Tenant;
+  generatedPassword: string;
+
   constructor(
     private fb: FormBuilder,
     private notificationService: NotificationService,
@@ -37,15 +41,21 @@ export class TenantFormComponent {
     };
     this.tenantService.createTenant(tenant).subscribe(
       (res) => {
-        this.notificationService.pushSuccess(`New tenant created: ${res.name}`);
+        const resTenant = res.tenant;
+        const resPasssword = res.password;
+        this.notificationService.pushSuccess(
+          `New tenant created: ${resTenant.name}`
+        );
         const domain: Tenant = {
-          name: res.name,
+          name: resTenant.name,
           avatarImageUrl: '',
           bannerImageUrl: '',
-          description: res.description,
-          email: res.email,
+          description: resTenant.description,
+          email: resTenant.email,
         };
-        this.doneSubmit.emit(domain);
+        this.generatedPassword = resPasssword;
+        this.createdTenant = domain;
+        this.isForm = false;
       },
       (err) => {
         console.error(err);
@@ -56,5 +66,21 @@ export class TenantFormComponent {
 
   isValid(): boolean {
     return this.tenantForm.valid;
+  }
+
+  onEmailSend(): void {
+    this.onDone();
+  }
+
+  onNoEmailSend(): void {
+    this.onDone();
+  }
+
+  onDone(): void {
+    this.tenantForm.reset();
+    this.isForm = true;
+    this.createdTenant = null;
+    this.generatedPassword = null;
+    this.doneSubmit.emit(this.createdTenant);
   }
 }
