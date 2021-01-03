@@ -16,7 +16,6 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { LoginComponent } from './auth/view/login/login.component';
 import { LogoutComponent } from './auth/view/logout/logout.component';
-import { RegisterComponent } from './auth/view/register/register.component';
 import { LandingComponent } from './core/view/landing/landing.component';
 import { NotFoundComponent } from './core/view/not-found/not-found.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
@@ -31,6 +30,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { TextInputComponent } from './core/view/input/text-input/text-input.component';
 import { TenantFormComponent } from './fiyaka/view/tenant-form/tenant-form.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { AuthInterceptor } from './auth/middleware/auth.interceptor';
+import { UnauthorizedComponent } from './auth/view/unauthorized/unauthorized.component';
 
 registerLocaleData(en);
 
@@ -39,7 +40,6 @@ registerLocaleData(en);
     AppComponent,
     LoginComponent,
     LogoutComponent,
-    RegisterComponent,
     LandingComponent,
     NotFoundComponent,
     LoadingComponent,
@@ -47,6 +47,7 @@ registerLocaleData(en);
     TenantCardComponent,
     TextInputComponent,
     TenantFormComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +69,7 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingHttpInterceptor,
