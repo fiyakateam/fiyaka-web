@@ -31,6 +31,8 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { TextInputComponent } from './core/view/input/text-input/text-input.component';
 import { TenantFormComponent } from './fiyaka/view/tenant-form/tenant-form.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { AuthInterceptor } from './auth/middleware/auth.interceptor';
+import { UnauthorizedComponent } from './auth/view/unauthorized/unauthorized.component';
 
 registerLocaleData(en);
 
@@ -47,6 +49,7 @@ registerLocaleData(en);
     TenantCardComponent,
     TextInputComponent,
     TenantFormComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingHttpInterceptor,
