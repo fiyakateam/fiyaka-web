@@ -39,10 +39,9 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    console.warn('hello');
     this.auth.login(this.loginEmail, this.loginPassword).subscribe(
       (res) => {
-        console.log(res);
+        this.notification.pushSuccess(`Logged in as ${res.user.username}`);
       },
       (err) => {
         console.error(err);
@@ -54,8 +53,14 @@ export class LoginComponent implements OnInit {
   onRegister(): void {
     this.auth
       .register(this.registerName, this.registerEmail, this.registerPassword)
-      .subscribe((res) => {
-        console.log(res);
-      });
+      .subscribe(
+        (res) => {
+          this.notification.pushSuccess(`Registerd as ${res.user.username}`);
+        },
+        (err) => {
+          console.error(err);
+          this.notification.pushError('Register failed');
+        }
+      );
   }
 }

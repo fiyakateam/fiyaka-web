@@ -10,7 +10,7 @@ import * as jwt from '../util/jwt-util';
 import { map, shareReplay, tap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   public redirectUrl: string;
@@ -21,12 +21,12 @@ export class AuthService {
   public login(email: string, password: string): Observable<AuthResult> {
     const request = {
       email,
-      password
+      password,
     };
     return this.http
-      .post<{token: string}>(ApiPath.login, request, { observe: 'response' })
+      .post<{ token: string }>(ApiPath.login, request, { observe: 'response' })
       .pipe(
-        map((response: HttpResponse<{token: string}>) => {
+        map((response: HttpResponse<{ token: string }>) => {
           const success = response.ok;
           if (success) {
             const token = response.body.token;
@@ -52,18 +52,22 @@ export class AuthService {
       );
   }
 
-  public register(name: string, email: string, password: string): Observable<AuthResult> {
+  public register(
+    name: string,
+    email: string,
+    password: string
+  ): Observable<AuthResult> {
     const request = {
       email,
       password,
       name,
-      isLandlord: true
     };
-    console.warn(request);
     return this.http
-      .post<{token: string}>(ApiPath.register, request, { observe: 'response' })
+      .post<{ token: string }>(ApiPath.register, request, {
+        observe: 'response',
+      })
       .pipe(
-        map((response: HttpResponse<{token: string}>) => {
+        map((response: HttpResponse<{ token: string }>) => {
           const success = response.ok;
           if (success) {
             const token = response.body.token;
