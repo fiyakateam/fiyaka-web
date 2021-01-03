@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
@@ -9,7 +9,7 @@ import { TenantService } from '../../service/tenant.service';
   templateUrl: './tenant-form.component.html',
   styleUrls: ['./tenant-form.component.css'],
 })
-export class TenantFormComponent {
+export class TenantFormComponent implements OnInit {
   tenantForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
@@ -17,6 +17,8 @@ export class TenantFormComponent {
   });
   @Output() doneSubmit = new EventEmitter<Tenant>();
 
+  isPopulated = false;
+  populatedId: string;
   isForm = true;
   createdTenant: Tenant;
   generatedPassword: string;
@@ -26,6 +28,18 @@ export class TenantFormComponent {
     private notificationService: NotificationService,
     private tenantService: TenantService
   ) {}
+
+  ngOnInit(): void {}
+
+  public populateWithTenant(tenant: Tenant): void {
+    this.tenantForm.setValue({
+      name: tenant.name,
+      email: tenant.email,
+      description: 'description foo',
+    });
+    this.isPopulated = true;
+    this.populatedId = tenant.id;
+  }
 
   onSubmit(): void {
     const formValue = this.tenantForm.value;
@@ -40,30 +54,44 @@ export class TenantFormComponent {
       avatarImageUrl: '',
       bannerImageUrl: '',
     };
-    this.tenantService.createTenant(tenant).subscribe(
-      (res) => {
-        const resTenant = res.tenant;
-        const resPasssword = res.password;
-        this.notificationService.pushSuccess(
-          `New tenant created: ${resTenant.name}`
-        );
-        const domain: Tenant = {
-          id: resTenant.id,
-          name: resTenant.name,
-          avatarImageUrl: '',
-          bannerImageUrl: '',
-          description: resTenant.description,
-          email: resTenant.email,
-        };
-        this.generatedPassword = resPasssword;
-        this.createdTenant = domain;
-        this.isForm = false;
-      },
-      (err) => {
-        console.error(err);
-        this.notificationService.pushError('Tenant creation failed');
-      }
-    );
+    if (this.isPopulated) {
+      const id = this.populatedId;
+      this.tenantService.updateTenant(id, tenant).subscribe(
+        (res) => {
+          this.notificationService.pushSuccess(`Tenant updated`);
+          this.onDone();
+        },
+        (err) => {
+          console.error(err);
+          this.notificationService.pushSuccess(`Tenant update failed`);
+        }
+      );
+    } else {
+      this.tenantService.createTenant(tenant).subscribe(
+        (res) => {
+          const resTenant = res.tenant;
+          const resPasssword = res.password;
+          this.notificationService.pushSuccess(
+            `New tenant created: ${resTenant.name}`
+          );
+          const domain: Tenant = {
+            id: resTenant.id,
+            name: resTenant.name,
+            avatarImageUrl: '',
+            bannerImageUrl: '',
+            description: resTenant.description,
+            email: resTenant.email,
+          };
+          this.generatedPassword = resPasssword;
+          this.createdTenant = domain;
+          this.isForm = false;
+        },
+        (err) => {
+          console.error(err);
+          this.notificationService.pushError('Tenant creation failed');
+        }
+      );
+    }
   }
 
   isValid(): boolean {
@@ -79,10 +107,16 @@ export class TenantFormComponent {
   }
 
   onDone(): void {
+    this.onReset();
+    this.doneSubmit.emit(this.createdTenant);
+  }
+
+  onReset(): void {
     this.tenantForm.reset();
     this.isForm = true;
     this.createdTenant = null;
     this.generatedPassword = null;
-    this.doneSubmit.emit(this.createdTenant);
+    this.isPopulated = false;
+    this.populatedId = null;
   }
 }
