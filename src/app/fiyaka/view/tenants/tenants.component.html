@@ -1,6 +1,6 @@
 <nz-divider nzOrientation="left" nzText="Responsive"></nz-divider>
 <div nz-row [nzGutter]="[16, 24]">
-  <div nz-col class="gutter-row" nzFlex="auto">
+  <div nz-col class="gutter-row">
     <app-tenant-card [createPlaceholder]="true" (createClick)="showModal()"></app-tenant-card>
   </div>
   <div *ngFor="let tenant of tenantList">
