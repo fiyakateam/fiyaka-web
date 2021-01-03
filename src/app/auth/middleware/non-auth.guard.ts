@@ -23,7 +23,6 @@ export class NonAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    this.auth.redirectUrl = state.url;
     const authStatus = this.auth.authStatus();
     if (authStatus.success) {
       this.router.navigate(['/landing']);
