@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
+import { EmailService } from '../../service/email.service';
 import { TenantService } from '../../service/tenant.service';
 
 @Component({
@@ -26,7 +27,8 @@ export class TenantFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private notificationService: NotificationService,
-    private tenantService: TenantService
+    private tenantService: TenantService,
+    private emailService: EmailService
   ) {}
 
   ngOnInit(): void {}
@@ -99,7 +101,23 @@ export class TenantFormComponent implements OnInit {
   }
 
   onEmailSend(): void {
-    this.onDone();
+    this.emailService
+      .sendGeneratedPasswordWithEmail(
+        this.generatedPassword,
+        this.createdTenant
+      )
+      .subscribe(
+        (res) => {
+          this.notificationService.pushSuccess('Sent credentials with email');
+          this.onDone();
+        },
+        (err) => {
+          console.error(err);
+          this.notificationService.pushSuccess(
+            'Could not send credentials with email'
+          );
+        }
+      );
   }
 
   onNoEmailSend(): void {
