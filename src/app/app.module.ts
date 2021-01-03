@@ -32,6 +32,7 @@ import { TenantFormComponent } from './fiyaka/view/tenant-form/tenant-form.compo
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { AuthInterceptor } from './auth/middleware/auth.interceptor';
 import { UnauthorizedComponent } from './auth/view/unauthorized/unauthorized.component';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 
 registerLocaleData(en);
 
@@ -48,6 +49,7 @@ registerLocaleData(en);
     TextInputComponent,
     TenantFormComponent,
     UnauthorizedComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ registerLocaleData(en);
     ReactiveFormsModule,
     FormsModule,
     NzModalModule,
+    NzBreadCrumbModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

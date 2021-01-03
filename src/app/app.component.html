@@ -1,24 +1,13 @@
-<nz-layout class="app-layout">
+<nz-layout>
   <nz-sider
-    class="menu-sidebar"
     nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
     [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
+    [nzWidth]="width"
+    [nzReverseArrow]="isReverseArrow"
   >
-    <div class="sidebar-logo">
-      <div (click)="isCollapsed = !isCollapsed">
-        <img src="assets/image/app_icon.png" alt="logo" />
-        <h1>{{ title }}</h1>
-      </div>
-      <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
-        <i
-          class="trigger"
-          nz-icon
-          [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-        ></i>
-      </span>
+  <img id="logo-img" src="assets/image/app_icon.png" alt="logo" />
+    <div class="logo">
+      <p>Fiyaka</p>
     </div>
     <ul
       nz-menu
@@ -52,20 +41,26 @@
       </li>
 
       <!-- <li nz-submenu nzTitle="About" nzIcon="info-circle">
-        <ul>
-          <li nz-menu-item nzIcon="authIcon">
-            App version: {{ version }}    
-          </li>
-        </ul>
-      </li> -->
+          <ul>
+            <li nz-menu-item nzIcon="authIcon">
+              App version: {{ version }}    
+            </li>
+          </ul>
+        </li> -->
     </ul>
   </nz-sider>
-  <nz-layout>
-    <nz-content>
-      <div class="inner-content">
+  <nz-layout style="height: 100vh">
+    <!-- <nz-header style="background: #fff; padding: 0"></nz-header> -->
+    <nz-content style="margin: 0 16px">
+      <nz-breadcrumb style="margin: 16px 0">
+        <!-- <nz-breadcrumb-item>User</nz-breadcrumb-item>
+        <nz-breadcrumb-item>Bill</nz-breadcrumb-item> -->
+      </nz-breadcrumb>
+      <div style="padding: 24px; background: #fff; min-height: 90%">
         <router-outlet></router-outlet>
-        <app-loading></app-loading>
       </div>
+      <app-loading></app-loading>
+      <nz-footer style="text-align: center;">Fiyaka ©2020 Developed with ❤️ by Fiyaka Team </nz-footer>
     </nz-content>
   </nz-layout>
 </nz-layout>
