@@ -30,6 +30,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { TextInputComponent } from './core/view/input/text-input/text-input.component';
 import { TenantFormComponent } from './fiyaka/view/tenant-form/tenant-form.component';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 registerLocaleData(en);
 
@@ -63,6 +64,7 @@ registerLocaleData(en);
     NzAvatarModule,
     ReactiveFormsModule,
     FormsModule,
+    NzModalModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
