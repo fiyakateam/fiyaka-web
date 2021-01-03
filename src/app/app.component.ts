@@ -5,12 +5,14 @@ import { AuthService } from './auth/service/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   title = 'fiyaka-webapp';
   version = 'v0.1';
   isCollapsed = false;
+  isReverseArrow = false;
+  width = 200;
   authLink = '/login';
   authLabel = 'Login';
   username = '';
