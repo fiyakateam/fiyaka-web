@@ -11,6 +11,7 @@
       <app-tenant-card
         [tenant]="tenant"
         (deleted)="refreshTenantList()"
+        (updateClick)="showModalWithData($event)"
       ></app-tenant-card>
     </div>
   </div>
@@ -22,5 +23,5 @@
   (nzOnCancel)="hideModal()"
   (nzOnOk)="hideModal()"
 >
-  <app-tenant-form (doneSubmit)="hideModal()"></app-tenant-form>
+  <app-tenant-form #tenantForm (doneSubmit)="hideModal()"></app-tenant-form>
 </nz-modal>

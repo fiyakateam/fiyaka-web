@@ -12,6 +12,7 @@ export class TenantCardComponent implements OnInit {
   @Input() createPlaceholder: boolean;
   @Input() tenant: Tenant;
   @Output() createClick = new EventEmitter<void>();
+  @Output() updateClick = new EventEmitter<Tenant>();
   @Output() deleted = new EventEmitter<void>();
 
   constructor(
@@ -38,5 +39,9 @@ export class TenantCardComponent implements OnInit {
         );
       }
     );
+  }
+
+  onUpdateClick(): void {
+    this.updateClick.emit(this.tenant);
   }
 }
