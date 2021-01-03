@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
+import { TenantService } from '../../service/tenant.service';
 
 @Component({
   selector: 'app-tenant-form',
@@ -14,11 +15,12 @@ export class TenantFormComponent {
     email: ['', Validators.required],
     description: [null, Validators.required],
   });
-  @Output() doneSubmit = new EventEmitter<void>();
+  @Output() doneSubmit = new EventEmitter<Tenant>();
 
   constructor(
     private fb: FormBuilder,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private tenantService: TenantService
   ) {}
 
   onSubmit(): void {
@@ -33,8 +35,23 @@ export class TenantFormComponent {
       avatarImageUrl: '',
       bannerImageUrl: '',
     };
-    console.warn(tenant);
-    this.doneSubmit.emit();
+    this.tenantService.createTenant(tenant).subscribe(
+      (res) => {
+        this.notificationService.pushSuccess(`New tenant created: ${res.name}`);
+        const domain: Tenant = {
+          name: res.name,
+          avatarImageUrl: '',
+          bannerImageUrl: '',
+          description: res.description,
+          email: res.email,
+        };
+        this.doneSubmit.emit(domain);
+      },
+      (err) => {
+        console.error(err);
+        this.notificationService.pushError('Tenant creation failed');
+      }
+    );
   }
 
   isValid(): boolean {
