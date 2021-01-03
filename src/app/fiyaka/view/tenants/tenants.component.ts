@@ -14,6 +14,7 @@ export class TenantsComponent implements OnInit {
   ngOnInit(): void {
     for (let i = 0; i < 100; i++) {
       this.tenantList.push({
+        email: 'tenant@gmail.com',
         name: 'Tenant Name',
         description: 'Tenant Description...',
         avatarImageUrl:
