@@ -7,6 +7,7 @@ import { Tenant } from '../../model/tenant.model';
   styleUrls: ['./tenants.component.css'],
 })
 export class TenantsComponent implements OnInit {
+  modalVisible = false;
   tenantList: Array<Tenant> = [];
 
   constructor() {}
@@ -23,5 +24,13 @@ export class TenantsComponent implements OnInit {
           'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
       });
     }
+  }
+
+  showModal(): void {
+    this.modalVisible = true;
+  }
+
+  hideModal(): void {
+    this.modalVisible = false;
   }
 }

@@ -1,8 +1,20 @@
 <nz-divider nzOrientation="left" nzText="Responsive"></nz-divider>
 <div nz-row [nzGutter]="[16, 24]">
+  <div nz-col class="gutter-row" nzFlex="auto">
+    <app-tenant-card [createPlaceholder]="true" (createClick)="showModal()"></app-tenant-card>
+  </div>
   <div *ngFor="let tenant of tenantList">
     <div nz-col class="gutter-row" nzFlex="auto">
       <app-tenant-card [tenant]="tenant"></app-tenant-card>
     </div>
   </div>
 </div>
+
+<nz-modal
+  [(nzVisible)]="this.modalVisible"
+  nzTitle="Create Tenant"
+  (nzOnCancel)="hideModal()"
+  (nzOnOk)="hideModal()"
+>
+  <app-tenant-form></app-tenant-form>
+</nz-modal>
