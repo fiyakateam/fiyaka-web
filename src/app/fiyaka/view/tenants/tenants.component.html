@@ -2,7 +2,7 @@
 <div nz-row [nzGutter]="[16, 24]">
   <div *ngFor="let tenant of tenantList">
     <div nz-col class="gutter-row" nzFlex="auto">
-      <app-tenant-card></app-tenant-card>
+      <app-tenant-card [tenant]="tenant"></app-tenant-card>
     </div>
   </div>
 </div>
