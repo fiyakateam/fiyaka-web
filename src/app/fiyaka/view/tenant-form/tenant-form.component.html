@@ -1,6 +1,26 @@
-<form [formGroup]="tenantForm" (ngSubmit)="onSubmit()">
-  <app-text-input placeholder="Email" formControlName="email"></app-text-input>
-  <app-text-input placeholder="Name" formControlName="name"></app-text-input>
-  <app-text-input placeholder="Description" formControlName="description"></app-text-input>
-  <button type="submit" [disabled]="!isValid()">Submit</button>
-</form>
+<div *ngIf="isForm">
+  <form [formGroup]="tenantForm" (ngSubmit)="onSubmit()">
+    <app-text-input
+      placeholder="Email"
+      formControlName="email"
+    ></app-text-input>
+    <app-text-input placeholder="Name" formControlName="name"></app-text-input>
+    <app-text-input
+      placeholder="Description"
+      formControlName="description"
+    ></app-text-input>
+    <button type="submit" [disabled]="!isValid()">Submit</button>
+  </form>
+</div>
+
+<div *ngIf="!isForm">
+  <h1>Tenant Created</h1>
+  <ul>
+    <li> email: {{ createdTenant.email }} </li>
+    <li> name: {{ createdTenant.name }} </li>
+    <li> generated password: {{ generatedPassword }} </li>
+  </ul>
+  <p>You can provide the credentials to you tenant with email.</p>
+  <button (click)="onEmailSend()">No thank you</button>
+  <button (click)="onNoEmailSend()">Send Email</button>
+</div>
