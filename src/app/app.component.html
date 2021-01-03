@@ -26,42 +26,38 @@
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
     >
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+      <li nz-menu-item nzMatchRouter routerLink="/dashboard">
+        <i nz-icon nzType="dashboard"></i>
+        <span>Dashboard</span>
+      </li>
+      <li nz-menu-item nzMatchRouter routerLink="/houses">
+        <i nz-icon nzType="home"></i>
+        <span>Houses</span>
+      </li>
+      <li nz-menu-item nzMatchRouter routerLink="/tenants">
+        <i nz-icon nzType="team"></i>
+        <span>Tenants</span>
+      </li>
+
+      <li nz-submenu nzTitle="Profile" nzIcon="user">
         <ul>
-          <li nz-menu-item nzMatchRouter nzIcon="authIcon">
-            <a routerLink="/profile">Profile</a>
+          <li nz-menu-item *ngIf="username != null && username.length > 0">
+            Logged in as {{ username }}
           </li>
+
           <li nz-menu-item nzMatchRouter nzIcon="authIcon">
-            <a routerLink="/house">House</a>
-          </li>
-          <li nz-menu-item nzMatchRouter nzIcon="authIcon">
-            <a routerLink="/chat">Chat</a>
+            <a [routerLink]="authLink">{{ authLabel }}</a>
           </li>
         </ul>
       </li>
 
-      <li nz-submenu nzTitle="Debug" nzIcon="dashboard">
+      <!-- <li nz-submenu nzTitle="About" nzIcon="info-circle">
         <ul>
-          <li nz-menu-item nzMatchRouter nzIcon="authIcon">
-            <a routerLink="/api-test">Api Test</a>
-          </li>
-
-          <li nz-menu-item nzMatchRouter nzIcon="authIcon">
-            <a routerLink="/debug">Debug Log</a>
+          <li nz-menu-item nzIcon="authIcon">
+            App version: {{ version }}    
           </li>
         </ul>
-      </li>
-
-      <li nz-menu-item nzMatchRouter nzIcon="authIcon">
-        <a [routerLink]="authLink">{{ authLabel }}</a>
-      </li>
-
-      <li nz-menu-item *ngIf="username != null && username.length > 0">
-        Logged in as {{username}}
-      </li>
-      <li>
-        {{ version }}
-      </li>
+      </li> -->
     </ul>
   </nz-sider>
   <nz-layout>
