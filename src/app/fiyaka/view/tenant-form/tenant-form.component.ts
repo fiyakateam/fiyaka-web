@@ -11,9 +11,8 @@ import { Tenant } from '../../model/tenant.model';
 export class TenantFormComponent {
   tenantForm = this.fb.group({
     name: ['', Validators.required],
-    provider: [null, Validators.required],
-    startDate: [null, Validators.required],
-    endDate: [null],
+    email: ['', Validators.required],
+    description: [null, Validators.required],
   });
 
   constructor(

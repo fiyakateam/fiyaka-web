@@ -1,5 +1,6 @@
 <form [formGroup]="tenantForm" (ngSubmit)="onSubmit()">
   <app-text-input placeholder="Email" formControlName="email"></app-text-input>
   <app-text-input placeholder="Name" formControlName="name"></app-text-input>
+  <app-text-input placeholder="Description" formControlName="description"></app-text-input>
   <button type="submit" [disabled]="!isValid()">Submit</button>
 </form>
