@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
@@ -28,6 +28,8 @@ import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { TenantCardComponent } from './fiyaka/view/tenant-card/tenant-card.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { TextInputComponent } from './core/view/input/text-input/text-input.component';
+import { TenantFormComponent } from './fiyaka/view/tenant-form/tenant-form.component';
 
 registerLocaleData(en);
 
@@ -42,6 +44,8 @@ registerLocaleData(en);
     LoadingComponent,
     TenantsComponent,
     TenantCardComponent,
+    TextInputComponent,
+    TenantFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,8 @@ registerLocaleData(en);
     NzDividerModule,
     NzCardModule,
     NzAvatarModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
