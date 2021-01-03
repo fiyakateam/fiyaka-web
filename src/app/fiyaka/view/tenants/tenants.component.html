@@ -1,11 +1,17 @@
 <nz-divider nzOrientation="left" nzText="Tenants"></nz-divider>
 <div nz-row [nzGutter]="[16, 24]">
   <div nz-col class="gutter-row">
-    <app-tenant-card [createPlaceholder]="true" (createClick)="showModal()"></app-tenant-card>
+    <app-tenant-card
+      [createPlaceholder]="true"
+      (createClick)="showModal()"
+    ></app-tenant-card>
   </div>
   <div *ngFor="let tenant of tenantList">
     <div nz-col class="gutter-row" nzFlex="auto">
-      <app-tenant-card [tenant]="tenant"></app-tenant-card>
+      <app-tenant-card
+        [tenant]="tenant"
+        (deleted)="refreshTenantList()"
+      ></app-tenant-card>
     </div>
   </div>
 </div>

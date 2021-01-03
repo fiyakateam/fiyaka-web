@@ -33,6 +33,7 @@ export class TenantFormComponent {
     const name = formValue.name;
     const description = formValue.description;
     const tenant: Tenant = {
+      id: null,
       name,
       email,
       description,
@@ -47,6 +48,7 @@ export class TenantFormComponent {
           `New tenant created: ${resTenant.name}`
         );
         const domain: Tenant = {
+          id: resTenant.id,
           name: resTenant.name,
           avatarImageUrl: '',
           bannerImageUrl: '',

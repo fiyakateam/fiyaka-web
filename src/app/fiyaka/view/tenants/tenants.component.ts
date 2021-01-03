@@ -35,6 +35,7 @@ export class TenantsComponent implements OnInit {
       (res) => {
         this.tenantList = res.map((e) => {
           const domain: Tenant = {
+            id: e.id,
             email: e.email,
             name: e.name,
             avatarImageUrl: '',
