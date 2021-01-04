@@ -21,7 +21,7 @@
   >
     <nz-card-meta
       [nzTitle]="tenant.name"
-      [nzDescription]="tenant.description"
+      [nzDescription]="getDescriptionBox()"
       [nzAvatar]="avatarTemplate"
     ></nz-card-meta>
   </nz-card>
@@ -46,6 +46,16 @@
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu nzSelectable>
+    <li nz-menu-item (click)="onEmail()">Send Email</li>
     <li nz-menu-item nzDanger (click)="onDelete()">Delete</li>
   </ul>
 </nz-dropdown-menu>
+
+<nz-modal
+  [(nzVisible)]="this.modalVisible"
+  nzTitle="Create Tenant"
+  (nzOnCancel)="hideModal()"
+  [nzOkText]="null"
+>
+  <app-email-form #emailForm (doneSubmit)="hideModal()"></app-email-form>
+</nz-modal>
