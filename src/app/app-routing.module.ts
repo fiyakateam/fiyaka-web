@@ -7,6 +7,7 @@ import { LogoutComponent } from './auth/view/logout/logout.component';
 import { UnauthorizedComponent } from './auth/view/unauthorized/unauthorized.component';
 import { LandingComponent } from './core/view/landing/landing.component';
 import { NotFoundComponent } from './core/view/not-found/not-found.component';
+import { HousesComponent } from './fiyaka/view/houses/houses.component';
 import { TenantsComponent } from './fiyaka/view/tenants/tenants.component';
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [NonAuthGuard] },
   { path: 'logout', component: LogoutComponent },
   { path: 'tenants', component: TenantsComponent, canActivate: [AuthGuard] },
+  { path: 'houses', component: HousesComponent, canActivate: [AuthGuard] },
   { path: '**', component: NotFoundComponent },
 ];
 
