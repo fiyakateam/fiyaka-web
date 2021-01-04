@@ -21,4 +21,13 @@ export class EmailService {
     };
     return this.http.post<void>(ApiPath.landlordEmail, request);
   }
+
+  sendEmail(tenant: Tenant, subject: string, text: string): Observable<void> {
+    const request = {
+      to: tenant.email,
+      subject,
+      text,
+    };
+    return this.http.post<void>(ApiPath.landlordEmail, request);
+  }
 }
