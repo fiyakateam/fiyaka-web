@@ -1,0 +1,8 @@
+<form [formGroup]="houseForm" (ngSubmit)="onSubmit()">
+  <app-text-input
+    placeholder="Name"
+    formControlName="name"
+  ></app-text-input>
+  <app-text-input placeholder="Address" formControlName="address"></app-text-input>
+  <button type="submit" [disabled]="!isValid()">Submit</button>
+</form>
