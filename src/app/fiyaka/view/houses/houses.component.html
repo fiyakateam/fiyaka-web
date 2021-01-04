@@ -1,0 +1,27 @@
+<nz-divider nzOrientation="left" nzText="Houses"></nz-divider>
+<div nz-row [nzGutter]="[16, 24]">
+  <div nz-col class="gutter-row">
+    <app-house-card
+      [createPlaceholder]="true"
+      (createClick)="showModal()"
+    ></app-house-card>
+  </div>
+  <div *ngFor="let house of houseList">
+    <div nz-col class="gutter-row" nzFlex="auto">
+      <app-house-card
+        [house]="house"
+        (deleted)="refreshHouseList()"
+        (updateClick)="showModalWithData($event)"
+      ></app-house-card>
+    </div>
+  </div>
+</div>
+
+<nz-modal
+  [(nzVisible)]="this.modalVisible"
+  nzTitle="Create House"
+  (nzOnCancel)="hideModal()"
+  (nzOnOk)="hideModal()"
+>
+  <app-house-form #houseForm (doneSubmit)="hideModal()"></app-house-form>
+</nz-modal>

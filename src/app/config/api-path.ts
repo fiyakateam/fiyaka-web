@@ -11,7 +11,13 @@ export class ApiPath {
   public static readonly landlord: string = `${ApiPath.api}/landlord`;
   public static readonly landlordEmail: string = `${ApiPath.landlord}/email`;
 
+  public static readonly house: string = `${ApiPath.api}/house`;
+
   public static tenantId(id: string): string {
     return `${ApiPath.tenant}/${id}`;
+  }
+
+  public static houseId(id: string): string {
+    return `${ApiPath.house}/${id}`;
   }
 }

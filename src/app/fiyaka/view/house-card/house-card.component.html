@@ -1,0 +1,52 @@
+<div *ngIf="createPlaceholder">
+    <nz-card
+      style="width: 300px"
+      [nzActions]="[actionEdit]"
+    >
+      <nz-card-meta
+        nzTitle="Create House"
+        nzDescription="You can create a new house and later on, assign your tenant to your house."
+      ></nz-card-meta>
+    </nz-card>
+    <ng-template #actionEdit>
+      <i nz-icon nzType="user-add" nzTheme="outline" (click)="onCreateClick()"></i>
+    </ng-template>
+  </div>
+  
+  <div *ngIf="!createPlaceholder">
+    <nz-card
+      style="width: 300px"
+      [nzCover]="coverTemplate"
+      [nzActions]="[actionSetting, actionEdit, actionEllipsis]"
+    >
+      <nz-card-meta
+        [nzTitle]="house.name"
+        [nzDescription]="house.address"
+        [nzAvatar]="avatarTemplate"
+      ></nz-card-meta>
+    </nz-card>
+    <ng-template #avatarTemplate>
+      <nz-avatar [nzSrc]="house.name"></nz-avatar>
+    </ng-template>
+    <ng-template #coverTemplate>
+      <img alt="example" [src]="house.name" />
+    </ng-template>
+    <ng-template #actionSetting>
+      <i nz-icon nzType="setting"></i>
+    </ng-template>
+    <ng-template #actionEdit>
+      <i nz-icon nzType="edit" (click)="onUpdateClick()"></i>
+    </ng-template>
+    <ng-template #actionEllipsis>
+      <a nz-dropdown [nzDropdownMenu]="menu">
+        <i nz-icon nzType="ellipsis" ></i>
+      </a>
+    </ng-template>
+  </div>
+  
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu nzSelectable>
+      <li nz-menu-item nzDanger (click)="onDelete()">Delete</li>
+    </ul>
+  </nz-dropdown-menu>
+  
