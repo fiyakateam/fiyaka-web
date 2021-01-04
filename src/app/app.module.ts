@@ -37,6 +37,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { HouseCardComponent } from './fiyaka/view/house-card/house-card.component';
 import { HousesComponent } from './fiyaka/view/houses/houses.component';
 import { HouseFormComponent } from './fiyaka/view/house-form/house-form.component';
+import { EmailFormComponent } from './fiyaka/view/email-form/email-form.component';
 
 registerLocaleData(en);
 
@@ -57,6 +58,7 @@ registerLocaleData(en);
     HouseCardComponent,
     HousesComponent,
     HouseFormComponent,
+    EmailFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
 import { TenantService } from '../../service/tenant.service';
+import { EmailFormComponent } from '../email-form/email-form.component';
 
 @Component({
   selector: 'app-tenant-card',
@@ -14,6 +22,8 @@ export class TenantCardComponent implements OnInit {
   @Output() createClick = new EventEmitter<void>();
   @Output() updateClick = new EventEmitter<Tenant>();
   @Output() deleted = new EventEmitter<void>();
+  modalVisible = false;
+  @ViewChild('emailForm') emailForm: EmailFormComponent;
 
   constructor(
     private tenantService: TenantService,
@@ -43,5 +53,23 @@ export class TenantCardComponent implements OnInit {
 
   onUpdateClick(): void {
     this.updateClick.emit(this.tenant);
+  }
+
+  showModal(): void {
+    this.modalVisible = true;
+  }
+
+  hideModal(): void {
+    this.modalVisible = false;
+    this.emailForm.onReset();
+  }
+
+  onEmail(): void {
+    this.emailForm.setTenant(this.tenant);
+    this.showModal();
+  }
+
+  getDescriptionBox(): string {
+    return `${this.tenant.email} - ${this.tenant.description}`;
   }
 }
