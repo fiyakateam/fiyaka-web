@@ -1,0 +1,8 @@
+<form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+  <app-text-input
+    placeholder="Subject"
+    formControlName="subject"
+  ></app-text-input>
+  <app-text-input placeholder="Content" formControlName="text"></app-text-input>
+  <button type="submit" [disabled]="!isValid()">Submit</button>
+</form>
