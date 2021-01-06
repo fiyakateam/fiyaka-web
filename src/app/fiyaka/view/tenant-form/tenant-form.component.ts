@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/core/service/notification.service';
+import PlaceholderImage from '../../constant/placeholder_image';
 import { Tenant } from '../../model/tenant.model';
 import { EmailService } from '../../service/email.service';
 import { TenantService } from '../../service/tenant.service';
@@ -53,8 +54,8 @@ export class TenantFormComponent implements OnInit {
       name,
       email,
       description,
-      avatarImageUrl: '',
-      bannerImageUrl: '',
+      avatarImageUrl: PlaceholderImage.avatar,
+      bannerImageUrl: PlaceholderImage.banner,
     };
     if (this.isPopulated) {
       const id = this.populatedId;
@@ -79,8 +80,8 @@ export class TenantFormComponent implements OnInit {
           const domain: Tenant = {
             id: resTenant.id,
             name: resTenant.name,
-            avatarImageUrl: '',
-            bannerImageUrl: '',
+            avatarImageUrl: PlaceholderImage.avatar,
+            bannerImageUrl: PlaceholderImage.banner,
             description: resTenant.description,
             email: resTenant.email,
           };

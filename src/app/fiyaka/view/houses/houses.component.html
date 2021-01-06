@@ -21,7 +21,7 @@
   [(nzVisible)]="this.modalVisible"
   nzTitle="Create House"
   (nzOnCancel)="hideModal()"
-  (nzOnOk)="hideModal()"
+  [nzOkText]="null"
 >
   <app-house-form #houseForm (doneSubmit)="hideModal()"></app-house-form>
 </nz-modal>

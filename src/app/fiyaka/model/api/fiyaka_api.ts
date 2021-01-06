@@ -16,4 +16,13 @@ export interface HouseResponse {
   name: string;
   address: string;
   _owner: string;
+  occupant: DumpTenantResponse;
+}
+
+export interface DumpTenantResponse {
+  _id: string;
+  name: string;
+  email: string;
+  landlord: string;
+  description: string;
 }

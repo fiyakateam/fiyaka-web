@@ -3,6 +3,8 @@ import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
 import { TenantService } from '../../service/tenant.service';
 import { TenantFormComponent } from '../tenant-form/tenant-form.component';
+import '../../constant/placeholder_image';
+import PlaceholderImage from '../../constant/placeholder_image';
 
 @Component({
   selector: 'app-tenants',
@@ -46,8 +48,8 @@ export class TenantsComponent implements OnInit {
             id: e.id,
             email: e.email,
             name: e.name,
-            avatarImageUrl: '',
-            bannerImageUrl: '',
+            avatarImageUrl: PlaceholderImage.avatar,
+            bannerImageUrl: PlaceholderImage.banner,
             description: e.description,
           };
           return domain;

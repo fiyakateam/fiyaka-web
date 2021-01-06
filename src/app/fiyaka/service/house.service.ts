@@ -37,4 +37,11 @@ export class HouseService {
     };
     return this.http.put<HouseResponse>(ApiPath.houseId(id), request);
   }
+
+  assignTenantToHouse(houseId: string, tenantId: string): Observable<void> {
+    const request = {
+      _occupant: tenantId,
+    };
+    return this.http.patch<void>(ApiPath.houseTenantPatch(houseId), request);
+  }
 }

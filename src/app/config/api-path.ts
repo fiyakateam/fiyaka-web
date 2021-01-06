@@ -20,4 +20,8 @@ export class ApiPath {
   public static houseId(id: string): string {
     return `${ApiPath.house}/${id}`;
   }
+
+  public static houseTenantPatch(id: string): string {
+    return `${ApiPath.houseId(id)}/tenant`;
+  }
 }

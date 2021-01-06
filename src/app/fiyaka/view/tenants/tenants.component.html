@@ -22,6 +22,7 @@
   nzTitle="Create Tenant"
   (nzOnCancel)="hideModal()"
   (nzOnOk)="hideModal()"
+  [nzOkText]="null"
 >
   <app-tenant-form #tenantForm (doneSubmit)="hideModal()"></app-tenant-form>
 </nz-modal>

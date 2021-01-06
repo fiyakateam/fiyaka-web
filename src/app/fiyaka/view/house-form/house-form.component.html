@@ -4,5 +4,6 @@
     formControlName="name"
   ></app-text-input>
   <app-text-input placeholder="Address" formControlName="address"></app-text-input>
+  <app-tenants-dropdown formControlName="tenant"></app-tenants-dropdown>
   <button type="submit" [disabled]="!isValid()">Submit</button>
 </form>
