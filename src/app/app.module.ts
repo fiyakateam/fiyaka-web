@@ -38,6 +38,8 @@ import { HouseCardComponent } from './fiyaka/view/house-card/house-card.componen
 import { HousesComponent } from './fiyaka/view/houses/houses.component';
 import { HouseFormComponent } from './fiyaka/view/house-form/house-form.component';
 import { EmailFormComponent } from './fiyaka/view/email-form/email-form.component';
+import { TenantsDropdownComponent } from './fiyaka/view/tenants-dropdown/tenants-dropdown.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 registerLocaleData(en);
 
@@ -59,6 +61,7 @@ registerLocaleData(en);
     HousesComponent,
     HouseFormComponent,
     EmailFormComponent,
+    TenantsDropdownComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +82,7 @@ registerLocaleData(en);
     NzModalModule,
     NzBreadCrumbModule,
     NzDropDownModule,
+    NzSelectModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

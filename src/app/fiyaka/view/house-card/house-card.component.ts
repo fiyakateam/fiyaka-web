@@ -1,7 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { HouseResponse } from '../../model/api/fiyaka_api';
+import { Tenant } from '../../model/tenant.model';
 import { HouseService } from '../../service/house.service';
+import { TenantsDropdownComponent } from '../tenants-dropdown/tenants-dropdown.component';
 
 @Component({
   selector: 'app-house-card',
@@ -21,7 +30,6 @@ export class HouseCardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.warn('hello: ');
     console.warn(this.house);
   }
 
@@ -46,5 +54,11 @@ export class HouseCardComponent implements OnInit {
 
   onUpdateClick(): void {
     this.updateClick.emit(this.house);
+  }
+
+  getDescription(): string {
+    return `${this.house?.occupant?.email ?? 'No Tenant Assigned'} - ${
+      this.house.address
+    }`;
   }
 }

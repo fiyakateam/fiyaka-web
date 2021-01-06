@@ -41,15 +41,7 @@ export class HousesComponent implements OnInit {
   refreshHouseList(): void {
     this.houseService.getHouseList().subscribe(
       (res) => {
-        this.houseList = res.map((e) => {
-          const domain: HouseResponse = {
-            _id: e._id,
-            address: e.address,
-            name: e.name,
-            _owner: e._owner,
-          };
-          return domain;
-        });
+        this.houseList = res;
         this.notificationService.pushSuccess('House list refreshed!');
       },
       (error) => {

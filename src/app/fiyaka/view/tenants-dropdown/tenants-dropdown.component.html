@@ -1,0 +1,13 @@
+<nz-select
+  nzShowSearch
+  nzAllowClear
+  nzPlaceHolder="Select Tenant"
+  [(ngModel)]="value"
+  (ngModelChange)="onInputChange($event)"
+>
+  <nz-option
+    *ngFor="let tenant of tenantList"
+    [nzLabel]="tenant.name"
+    [nzValue]="tenant"
+  ></nz-option>
+</nz-select>
