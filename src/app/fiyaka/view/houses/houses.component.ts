@@ -42,6 +42,7 @@ export class HousesComponent implements OnInit {
     this.houseService.getHouseList().subscribe(
       (res) => {
         this.houseList = res;
+        console.warn(this.houseList);
         this.notificationService.pushSuccess('House list refreshed!');
       },
       (error) => {

@@ -26,7 +26,9 @@ export class HouseService {
     const request = {
       address: house.address,
       name: house.name,
+      _occupant: house.occupant,
     };
+    console.warn(request);
     return this.http.post<HouseResponse>(ApiPath.house, request);
   }
 
@@ -34,7 +36,9 @@ export class HouseService {
     const request = {
       address: house.address,
       name: house.name,
+      _occupant: house.occupant,
     };
+    console.warn(request);
     return this.http.put<HouseResponse>(ApiPath.houseId(id), request);
   }
 

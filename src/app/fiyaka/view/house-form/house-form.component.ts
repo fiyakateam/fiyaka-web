@@ -60,8 +60,10 @@ export class HouseFormComponent implements OnInit {
       name,
       address,
       _owner: null,
-      occupant: tenant,
+      occupant: tenant.id,
     };
+    console.warn('house');
+    console.warn(house);
     if (this.isPopulated) {
       const id = this.populatedId;
       this.houseService.updateHouse(id, house).subscribe(
