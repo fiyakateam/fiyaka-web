@@ -8,6 +8,7 @@ import { UnauthorizedComponent } from './auth/view/unauthorized/unauthorized.com
 import { LandingComponent } from './core/view/landing/landing.component';
 import { NotFoundComponent } from './core/view/not-found/not-found.component';
 import { ChatDebugComponent } from './fiyaka/view/chat-debug/chat-debug.component';
+import { ChatTenantComponent } from './fiyaka/view/chat-tenant/chat-tenant.component';
 import { HousesComponent } from './fiyaka/view/houses/houses.component';
 import { TenantsComponent } from './fiyaka/view/tenants/tenants.component';
 
@@ -23,6 +24,11 @@ const routes: Routes = [
   { path: 'logout', component: LogoutComponent },
   { path: 'tenants', component: TenantsComponent, canActivate: [AuthGuard] },
   { path: 'houses', component: HousesComponent, canActivate: [AuthGuard] },
+  {
+    path: 'chat-tenant',
+    component: ChatTenantComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'chat-debug',
     component: ChatDebugComponent,

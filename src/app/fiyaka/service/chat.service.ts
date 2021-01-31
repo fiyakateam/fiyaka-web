@@ -3,6 +3,7 @@ import { Socket } from 'ngx-socket-io';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/service/auth.service';
 import { ConversationModel } from '../model/api/fiyaka_api';
+import { Tenant } from '../model/tenant.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class ChatService {
     Array<ConversationModel>
   >;
   public readonly conversations$: Observable<Array<ConversationModel>>;
+  public currentTenant: Tenant = null;
 
   constructor(private socket: Socket, private authService: AuthService) {
     this.conversationsSubject = new BehaviorSubject<Array<ConversationModel>>(
@@ -24,8 +26,17 @@ export class ChatService {
       console.log(`landlord_conversation: ${domain[0].landlord}`);
       this.conversationsSubject.next(domain);
     });
-    this.socket.on('message', (data) => {
-      console.log(`message: ${data}`);
+    this.socket.on('message', (data: any) => {
+      let domain = <ConversationModel>data;
+      console.log(`message: ${domain.landlord}`);
+      const last = this.conversationsSubject.value;
+      for (let i = 0; i < last.length; i++) {
+        if (last[i]._id === domain._id) {
+          last[i] = domain;
+          break;
+        }
+      }
+      this.conversationsSubject.next(last);
     });
   }
 
@@ -45,5 +56,16 @@ export class ChatService {
       token,
     };
     this.socket.emit('join_landlord', payload);
+  }
+
+  send(content: string, to: string) {
+    const token = this.getToken();
+    if (!token) return;
+    const payload = {
+      token,
+      content,
+      to,
+    };
+    this.socket.emit('send_message', payload);
   }
 }

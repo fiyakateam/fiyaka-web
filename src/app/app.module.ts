@@ -42,6 +42,7 @@ import { TenantsDropdownComponent } from './fiyaka/view/tenants-dropdown/tenants
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { ChatDebugComponent } from './fiyaka/view/chat-debug/chat-debug.component';
+import { ChatTenantComponent } from './fiyaka/view/chat-tenant/chat-tenant.component';
 
 const socketConfig: SocketIoConfig = {
   url: 'fiyakaapi.herokuapp.com/',
@@ -72,6 +73,7 @@ registerLocaleData(en);
     EmailFormComponent,
     TenantsDropdownComponent,
     ChatDebugComponent,
+    ChatTenantComponent,
   ],
   imports: [
     BrowserModule,

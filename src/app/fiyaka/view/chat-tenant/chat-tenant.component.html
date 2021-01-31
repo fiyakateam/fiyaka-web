@@ -1,0 +1,14 @@
+<app-text-input [(ngModel)]="currentInput"></app-text-input>
+<button type="button" (click)="sendMessage()">Send</button>
+
+<div *ngIf="conversation">
+    <li>ID: {{ conversation._id }}</li>
+    <li>Landlord: {{ conversation.landlord }}</li>
+    <li>Tenant: {{ conversation.tenant }}</li>
+    <ul>
+        <li *ngFor="let message of conversation.messages">
+            {{ ownerText(message.from) }}: {{message.content}}
+        </li>
+    </ul>
+</div>
+

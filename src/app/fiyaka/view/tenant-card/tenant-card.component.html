@@ -32,7 +32,7 @@
     <img alt="example" [src]="tenant.bannerImageUrl" />
   </ng-template>
   <ng-template #actionSetting>
-    <i nz-icon nzType="setting"></i>
+    <i nz-icon nzType="setting" (click)="onChatClick()"></i>
   </ng-template>
   <ng-template #actionEdit>
     <i nz-icon nzType="edit" (click)="onUpdateClick()"></i>

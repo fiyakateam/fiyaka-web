@@ -6,8 +6,10 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { NotificationService } from 'src/app/core/service/notification.service';
 import { Tenant } from '../../model/tenant.model';
+import { ChatService } from '../../service/chat.service';
 import { TenantService } from '../../service/tenant.service';
 import { EmailFormComponent } from '../email-form/email-form.component';
 
@@ -27,7 +29,9 @@ export class TenantCardComponent implements OnInit {
 
   constructor(
     private tenantService: TenantService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private chatService: ChatService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -53,6 +57,12 @@ export class TenantCardComponent implements OnInit {
 
   onUpdateClick(): void {
     this.updateClick.emit(this.tenant);
+  }
+
+  onChatClick(): void {
+    this.chatService.currentTenant = this.tenant;
+    console.log(`Chat click: ${this.tenant}`);
+    this.router.navigate(['/chat-tenant']);
   }
 
   showModal(): void {
