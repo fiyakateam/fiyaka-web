@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthResult } from './auth/model/auth-result';
 import { AuthService } from './auth/service/auth.service';
+import { ChatService } from './fiyaka/service/chat.service';
 
 @Component({
   selector: 'app-root',

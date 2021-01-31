@@ -26,3 +26,18 @@ export interface DumpTenantResponse {
   landlord: string;
   description: string;
 }
+
+export interface ConversationModel {
+  _id: string;
+  landlord: string;
+  tenant: string;
+  messages: Array<MessageModel>;
+}
+
+export interface MessageModel {
+  _id: string;
+  content: string;
+  to: string;
+  from: string;
+  date: string;
+}

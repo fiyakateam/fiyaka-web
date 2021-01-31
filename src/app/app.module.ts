@@ -40,6 +40,15 @@ import { HouseFormComponent } from './fiyaka/view/house-form/house-form.componen
 import { EmailFormComponent } from './fiyaka/view/email-form/email-form.component';
 import { TenantsDropdownComponent } from './fiyaka/view/tenants-dropdown/tenants-dropdown.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { ChatDebugComponent } from './fiyaka/view/chat-debug/chat-debug.component';
+
+const socketConfig: SocketIoConfig = {
+  url: 'fiyakaapi.herokuapp.com/',
+  options: {
+    transports: ['websocket'],
+  },
+};
 
 registerLocaleData(en);
 
@@ -62,6 +71,7 @@ registerLocaleData(en);
     HouseFormComponent,
     EmailFormComponent,
     TenantsDropdownComponent,
+    ChatDebugComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +93,7 @@ registerLocaleData(en);
     NzBreadCrumbModule,
     NzDropDownModule,
     NzSelectModule,
+    SocketIoModule.forRoot(socketConfig),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

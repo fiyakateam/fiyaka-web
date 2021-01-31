@@ -1,0 +1,19 @@
+<p>chat-debug works!</p>
+<button type="button" (click)="join()">Join</button>
+<!-- <button type="button" (click)="null">Disconnect</button> -->
+
+<div *ngFor="let conversation of conversations">
+<ul>
+    <li>ID: {{ conversation._id }}</li>
+    <li>Landlord: {{ conversation.landlord }}</li>
+    <li>Tenant: {{ conversation.tenant }}</li>
+    <ul>
+        <li *ngFor="let message of conversation.messages">
+            content {{message.content}}
+            from {{ message.from }}
+            to {{ message.to }}
+            date {{ message.date }}
+        </li>
+    </ul>
+</ul>
+</div>
